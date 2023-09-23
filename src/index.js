@@ -8,7 +8,8 @@ import helmet from 'helmet';
 import morgan from "morgan";
 import path from 'path';
 import { fileURLToPath } from 'url';
-import exp from 'constants';
+import router from './routes/index.js'
+
 
 //server config
 
@@ -33,4 +34,21 @@ app.use("assets", express.static(path.join(__direname, 'public/assets')));
         cb(null, file.originalname)
     }
  });
- 
+
+ const upload = multer({ storage });
+
+ //use router
+ app.use(router);
+
+
+ //mongodb config
+
+const PORT = process.env.PORT || 6001;
+
+mongoose.connect(process.env.URL_DB, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}).then(()=>{
+    app.listen(PORT, ()=> console.log(`Server Port: ${PORT}`))
+})
+.catch((error)=> console.log(`${error} did not connect`))
