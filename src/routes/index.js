@@ -1,12 +1,12 @@
 import { Router } from "express";
 import multer from 'multer';
-import { register } from "../controllers/register";
+import { register } from "../controllers/register.js";
 
 const router = Router();
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb){
-        cb(null, "public/assets");
+        cb(null, 'public/assets');
     },
     filename: function(req, file, cb){
         cb(null, file.originalname)
@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
 
  const upload = multer({ storage });
 
-router.post('auth/register', upload.single('picture'), register);
+router.post('/auth/register', upload.single('picturePath'), register);
 
 
 export default router;
