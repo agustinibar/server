@@ -6,7 +6,7 @@ const router = Router();
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb){
-        cb(null, 'public/assets');
+        cb(null, './public/assets');
     },
     filename: function(req, file, cb){
         cb(null, file.originalname)
@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
 
  const upload = multer({ storage });
 
-router.post('/auth/register', upload.single('picturePath'), register);
+router.post('/auth/register', upload.single('picture'), register);
 
 
 export default router;
