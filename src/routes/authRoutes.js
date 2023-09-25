@@ -3,7 +3,7 @@ import multer from 'multer';
 import { register } from '../controllers/register.js'
 import { login } from "../controllers/login.js";
 
-export const authRoutes = Router();
+export const authRouter = Router();
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb){
@@ -16,5 +16,5 @@ const storage = multer.diskStorage({
 
  const upload = multer({ storage });
 
- authRoutes.post('/register', upload.single('picture'), register);
- authRoutes.post('/login', login)
+ authRouter.post('/register', upload.single('picture'), register);
+ authRouter.post('/login', login)
