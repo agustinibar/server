@@ -1,7 +1,8 @@
 import { Router } from "express";
-import multer from 'multer';
 import { register } from '../controllers/register.js'
 import { login } from "../controllers/login.js";
+import multer from 'multer';
+
 
 export const authRouter = Router();
 
@@ -14,7 +15,8 @@ const storage = multer.diskStorage({
     }
  });
 
- const upload = multer({ storage });
+const upload = multer({ storage });
+
 
  authRouter.post('/register', upload.single('picture'), register);
  authRouter.post('/login', login)

@@ -3,12 +3,12 @@ import { authRouter } from "./authRoutes.js";
 import { usersRouter } from "./usersRoutes.js";
 import { postRouter } from "./postRouter.js";
 
-const router = Router();
 
+const router = Router();
 
 
 router.use('/auth', authRouter);
 router.use('/users', usersRouter)
-router.use('/posts', postRouter)
+router.use('/post', postRouter)
 
 export default router;
