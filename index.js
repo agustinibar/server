@@ -7,10 +7,14 @@ import helmet from 'helmet';
 import morgan from "morgan";
 import path from 'path';
 import { fileURLToPath } from 'url';
-import router from '../src/routes/index.js'
+import router from './routes/index.js'
 import User from './models/User.js';
 import Post from './models/Posts.js';
 import { users, posts } from './data/index.js';
+import { createPost } from './controllers/posts.js';
+import { register } from './controllers/register.js';
+import multer from 'multer';
+import { verifyToken } from './middleware/auth.js';
 
 //server config
 
@@ -30,6 +34,20 @@ app.use(cors({
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, 
   }));
+
+  const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, "public/assets");
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname);
+    },
+  });
+  const upload = multer({ storage });
+  
+  /* ROUTES WITH FILES */
+  app.post("/auth/register", upload.single("picture"), register);
+  app.post("/posts", verifyToken, upload.single("picture"), createPost);
 
  //use router
  app.use(router);

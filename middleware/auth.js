@@ -8,13 +8,13 @@ export const verifyToken = async(req, res, next)=>{
             return res.status(403).send("Acces Denied");
         };
 
-        if(token.startWith("Bearer ")){
+        if(token.startsWith("Bearer ")){
             token = token.slice(7, token.length).trimLeft();
         };
 
         const verify = jwt.verify(token, process.env.JWT_SECRET);
 
-        req.user = verified;
+        req.user = verify;
         next()
     } catch (error) {
         res.status(500).json({ error: error.message })

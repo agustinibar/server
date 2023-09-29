@@ -12,7 +12,7 @@ export const register = async(req, res)=>{
             location,
             occupation,
         } = req.body;
-        const picturePath = req.file.path; 
+        const picturePath =  req.file.path; 
         
         const salt = await bcrypt.genSalt();
         const passwordHash = await bcrypt.hash(password, salt);
