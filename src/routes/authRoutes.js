@@ -20,3 +20,4 @@ const upload = multer({ storage });
 
  authRouter.post('/register', upload.single('picture'), register);
  authRouter.post('/login', login)
+ 
