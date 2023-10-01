@@ -47,7 +47,7 @@ app.use(cors({
   
   /* ROUTES WITH FILES */
   app.post("/auth/register", upload.single("picture"), register);
-  app.post("/posts", verifyToken, upload.single("picture"), createPost);
+  app.post("/post", verifyToken, upload.single("picture"), createPost);
 
  //use router
  app.use(router);
