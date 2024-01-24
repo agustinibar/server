@@ -13,7 +13,9 @@ export const createPost = async(req, res)=>{
         const { userId, description, picturePath } = req.body;
         const user = await User.findById(userId);
 
-        const uploadedImage = await cloudinary.uploader.upl
+        const uploadedImage = await cloudinary.uploader.upload(req.file.path, {
+            folder: 'uploads',
+          }); 
 
         const newPost = new Post({
             userId,
@@ -22,14 +24,14 @@ export const createPost = async(req, res)=>{
             location: user.location,
             description,
             userPicturePath: user.picturePath,
-            picturePath: picturePath,
+            picturePath: uploadedImage.secure_url,
             likes: {},
             comments: []
         });
 
         await newPost.save();
         
-        const post = await Post.find();
+        const post = await Post.findById(newPost._id);
 
         res.status(201).json(post);
 
