@@ -30,7 +30,7 @@ app.use(bodyParser.json({limit: "30mb", extended: true}));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true}));
 app.use("/assets", express.static(path.join(__dirname, 'public/assets')));
 app.use(cors({
-    origin:  ['http://localhost:3000', 'https://foodiesitelab.com'],
+    origin:  ['http://localhost:3000', 'https://xapport.netlify.app/'],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, 
   }));
